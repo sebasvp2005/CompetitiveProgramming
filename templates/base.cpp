@@ -21,3 +21,9 @@ int main() {
 	while(t--)solve();
 	return 0;
 }
+
+/*
+	You should read all the statement
+	If you dont know what do to,then you havent understand the problem
+
+*/

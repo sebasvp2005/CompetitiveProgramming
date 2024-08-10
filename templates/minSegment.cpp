@@ -8,8 +8,9 @@ ll mod = 1e9+7;
  
 class SegmentTree
 {
-    int* tree;
-    int* lazy;
+    vector<int> tree;
+    vector<int> lazy;
+    const int INF = -1e9;
     int n;
  
     void build_tree(const vector<int>& v, int node, int a, int b)
@@ -20,7 +21,7 @@ class SegmentTree
  
         build_tree(v, node * 2, a, (a + b) / 2);
         build_tree(v, node * 2 + 1, 1 + (a + b) / 2, b);
-        tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+        tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
     }
  
     void update_lazy(int node, int a, int b)
@@ -56,12 +57,12 @@ class SegmentTree
         update_tree(node * 2, a, (a + b) / 2, i, j, value);
         update_tree(1 + node * 2, 1 + (a + b) / 2, b, i, j, value);
  
-        tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+        tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
     }
  
     int query_tree(int node, int a, int b, int i, int j)
     {
-        if (a > b || a > j || b < i) return 2100000000;
+        if (a > b || a > j || b < i) return INF;
  
         if (lazy[node] != 0) update_lazy(node,a,b);
  
@@ -70,7 +71,7 @@ class SegmentTree
         int q1 = query_tree(node * 2, a, (a + b) / 2, i, j);
         int q2 = query_tree(1 + node * 2, 1 + (a + b) / 2, b, i, j);
  
-        return min(q1, q2);
+        return max(q1, q2);
     }
  
 public:
@@ -80,12 +81,10 @@ public:
  
         int s = 2*pow(2, ceil(log2(v.size())));
  
-        tree = new int[s];
+        tree = vector<int>(s);
  
-        lazy = new int[s];
- 
-        memset(lazy, 0, sizeof lazy);
- 
+        lazy = vector<int>(s);
+
         build_tree(v, 1, 0, n - 1);
     }
  
