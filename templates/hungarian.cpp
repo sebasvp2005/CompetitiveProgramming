@@ -5,11 +5,6 @@ using namespace std;
 
 ll mod = 1e9+7;
 
-
-const int LOG = 23;
-
-const int PHI = -1;
-const int NOL = -2;
 const int INF = 1e9;
 
 vector<int> hungarianAlgorithm(const vector<vector<int>>& costMatrix) {

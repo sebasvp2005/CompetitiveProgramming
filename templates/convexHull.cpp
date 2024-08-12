@@ -5,9 +5,18 @@ using namespace std;
 #define ll long long int
 #define endl '\n'
 
+#define ff first
+#define ss second
+
+ll clockwise(point a, point b, point c){ //  < 0 meand clockwise / else > 0 counter-clokwise
+	return (a.ff * b.ss + b.ff * c.ss + c.ff * a.ss) - (b.ss * c.ff + c.ss * a.ff + a.ss * b.ff);
+}
+
 int cross(point o, point a, point b){
     return  ((a.first - o.first) * (b.second - o.second)) - ((a.second - o.second) * (b.first - o.first));
 }
+
+
 
 vector<point> convexHull( vector<point> points){
     int n = points.size();

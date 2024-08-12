@@ -7,14 +7,14 @@ using namespace std;
 
 class SparseTable {
 private:
-    std::vector<std::vector<int>> table;
-    std::vector<int> log;
+    vector<vector<int>> table;
+    vector<int> log;
 
 public:
-    SparseTable(const std::vector<int>& arr) {
+    SparseTable(const vector<int>& arr) {
         int n = arr.size();
-        int maxLog = std::log2(n) + 1;
-        table.assign(n, std::vector<int>(maxLog));
+        int maxLog = log2(n) + 1;
+        table.assign(n, vector<int>(maxLog));
         log.assign(n + 1, 0);
 
         for (int i = 2; i <= n; i++) {
@@ -27,14 +27,14 @@ public:
 
         for (int j = 1; j <= maxLog; j++) {
             for (int i = 0; i + (1 << j) <= n; i++) {
-                table[i][j] = std::min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1]);
+                table[i][j] = min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1]);
             }
         }
     }
 
     int query(int L, int R) {
         int j = log[R - L + 1];
-        return std::min(table[L][j], table[R - (1 << j) + 1][j]);
+        return min(table[L][j], table[R - (1 << j) + 1][j]);
     }
 };
 

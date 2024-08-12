@@ -7,6 +7,27 @@ using namespace std;
 ll mod = 1e9+7;
 
 
+
+struct fenwick
+{
+    int size ;
+    vector<ll>tree;
+    fenwick(int n){
+        size = n+5;
+        tree = vector<ll> (n+5);
+    }
+    void add(int x, int v){
+        for(; x<=size; x+=x&-x) tree[x]+=v;
+    }
+    ll sum(int x){
+        ll s=0;
+        for(; x>0; x-=x&-x)s+=tree[x];
+        return s;
+    }
+};
+
+
+
 void solve(){
 
 }
