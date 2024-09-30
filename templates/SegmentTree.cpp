@@ -82,6 +82,16 @@ public:
  
         build_tree(v, 1, 0, n - 1);
     }
+    
+    SegmentTree(){
+
+    }
+
+    void operator = (const SegmentTree & s){
+        this->tree = s.tree;
+        this->lazy = s.lazy;
+		this->n = s.n;
+    }
  
     void update(int idx1, int idx2, ll add)
     {
